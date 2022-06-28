@@ -31,15 +31,12 @@ def main():
     password.send_keys(credentials['password'])
     browser.find_element(By.ID, "clogs-captcha-button").click()
 
-    loadedEl = WebDriverWait(browser, 4).until(EC.presence_of_element_located((By.ID, 'name')))
-    print(loadedEl)
-    print("ready")
-
-    if "My No-IP" not in browser.title:
+    try:
+        loadedEl = WebDriverWait(browser, 4).until(EC.presence_of_element_located((By.ID, 'name')))
+        print("Login Succ")
+    except:
         print("Login Failed")
         return
-    else:
-        print("Login Succ")
 
     #Move To Hostname Page
     browser.get('https://my.noip.com/dynamic-dns')
