@@ -32,6 +32,8 @@ def main():
     if "My No-IP" not in browser.title:
         print("Login Failed")
         return
+    else:
+        print("Login Succ")
 
     #Move To Hostname Page
     browser.get('https://my.noip.com/dynamic-dns')
