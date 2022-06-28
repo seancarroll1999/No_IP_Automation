@@ -3,6 +3,8 @@ import json
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 def read_credentials(file_path):
     return json.load(open(file_path))
@@ -28,6 +30,10 @@ def main():
     username.send_keys(credentials['username'])
     password.send_keys(credentials['password'])
     browser.find_element(By.ID, "clogs-captcha-button").click()
+
+    loadedEl = WebDriverWait(browser, 4).until(EC.presence_of_element_located((By.ID, 'name')))
+    print(loadedEl)
+    print("ready")
 
     if "My No-IP" not in browser.title:
         print("Login Failed")
